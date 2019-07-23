@@ -45,7 +45,7 @@ function getDateObjectByDate(date, selectDate) {
         },
         lunar: solarTransformLunar(date.getFullYear(), date.getMonth(), date.getDate()),
         term: getTerm(date.getFullYear(), date.getMonth(), date.getDate()),
-        type: (date.getMonth() + 1) === selectDate.month + 1 ? "info" : "error"
+        type: (date.getMonth() + 1) === selectDate.month + 1 ? "info" : "default"
     };
 }
 

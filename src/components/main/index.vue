@@ -8,19 +8,43 @@
                         <Button type="text" icon="ios-arrow-up" size="large"/>
                         <Button type="text" icon="ios-arrow-down" size="large" style="margin-left: 2px;"/>
                     </div>
-                    <transition enter-active-class="animated zoomIn faster">
+                    <transition enter-active-class="animated zoomIn faster" v-if="true">
                         <day-view v-if="calendarNum===1" v-on:selectDay="setDay" :date="select"/>
                         <month-view v-else-if="calendarNum===2" v-on:selectMonth="setMonth"/>
                         <year-view v-else-if="calendarNum===3" v-on:selectYear="setYear"/>
                         <p v-else>error</p>
                     </transition>
                 </Card>
+
+                <Card style="margin-top: 10px;">
+                    <div style="text-align:center">
+                        <img src="@/assets/CaptainMarvel.jpg">
+                        <Divider>Toolkit</Divider>
+                        <div>
+                            <Button shape="circle" icon="ios-settings"></Button>&nbsp;
+                            <Button shape="circle" icon="md-trending-up"></Button>&nbsp;
+                            <Button shape="circle" icon="ios-ribbon"></Button>&nbsp;
+                        </div>
+                    </div>
+                </Card>
             </Col>
             <Col span="17">
-                <Card>
+                <Card style="min-height: 500px;">
                     <Tabs>
-                        <TabPane label="macOS" icon="logo-apple">标签一的内容</TabPane>
-                        <TabPane label="Windows" icon="logo-windows">标签二的内容</TabPane>
+                        <TabPane label="macOS" icon="logo-apple">
+
+                            <Divider>daily task</Divider>
+                            <template v-for="item,index in ['fixed','interval','file','describe']">
+                                <Divider dashed size="small" class="item" orientation="left">
+                                    <h4>Part.{{index+1}}</h4>
+                                </Divider>
+                                <schedule-component :type="item"/>
+                            </template>
+
+                        </TabPane>
+                        <TabPane label="Windows" icon="logo-windows">
+                            <span slot="label">With Switch</span>
+                        </TabPane>
                         <TabPane label="Linux" icon="logo-tux">标签三的内容</TabPane>
                     </Tabs>
                 </Card>
@@ -34,6 +58,7 @@
     import DayView from '@/components/main/dayView';
     import MonthView from "@/components/main/monthView";
     import YearView from "@/components/main/yearView";
+    import scheduleComponent from "@/components/main/scheduleComponent";
 
     export default {
         name: "index",
@@ -53,7 +78,8 @@
         components: {
             DayView,
             MonthView,
-            YearView
+            YearView,
+            scheduleComponent
         },
         methods: {
             choose() {
@@ -98,5 +124,15 @@
         background-color: #f5f7f9;
         padding: 20px;
         height: 100%;
+    }
+
+    img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .item {
+        width: 25%;
+        min-width: 25%;
     }
 </style>
